@@ -26,8 +26,8 @@ day = None
 
 def send_mail(to_addr, To_msg, subject, text):#转发邮箱函数： to_addr = 接收者的邮箱, To_msg = 接收者的名字, subject = 邮箱主题, text = 邮箱内容
     # 发信方的信息：发信邮箱，QQ 邮箱授权码
-    from_addr = '*********@qq.com'
-    password = '******************' # 不是登录qq要用的密码，是在qq邮箱"设置"中使用stmp协议功能产生的密码
+    from_addr = '3049625601@qq.com'
+    password = 'lcbygiydbggcdebh' # 不是登录qq要用的密码，是在qq邮箱"设置"中使用stmp协议功能产生的密码
 
     # 发信服务器
     smtp_server = 'smtp.qq.com'
@@ -56,6 +56,7 @@ def send_mail(to_addr, To_msg, subject, text):#转发邮箱函数： to_addr = �
 
 def req():#爬取程序
     global n_time, day
+    hdm_errmsg = hdm()
     url = "http://ecard.jyu.edu.cn:8988/web/Common/Tsm.html"  # 210.38.160.91
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36 Edg/104.0.1293.70"
@@ -84,6 +85,7 @@ def req():#爬取程序
         send_mail('3132475656@qq.com', '201舍友', '宿舍剩余电量不足10，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
         send_mail('2031915277@qq.com', '201舍友', '宿舍剩余电量不足10，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
         send_mail('c1470005346@163.com', '201舍友', '宿舍剩余电量不足10，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
+        send_mail('1470910678@qq.com', '807舍友', '宿舍剩余电量不足10，请及时缴费！\n宿舍剩余电量：' + str(hdm_errmsg), '')
     elif errmsg < 40.0:
         send_mail('947338658@qq.com', '201舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
         send_mail('2105287320@qq.com', '201舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
@@ -93,6 +95,7 @@ def req():#爬取程序
         send_mail('3132475656@qq.com', '201舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
         send_mail('2031915277@qq.com', '201舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
         send_mail('c1470005346@163.com', '201舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
+        send_mail('1470910678@qq.com', '807舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(hdm_errmsg), '')
     else:
         send_mail('947338658@qq.com', '201舍友', '宿舍剩余电量：' + str(errmsg), '')
         send_mail('2105287320@qq.com', '201舍友', '宿舍剩余电量：' + str(errmsg), '')
@@ -102,6 +105,7 @@ def req():#爬取程序
         send_mail('3132475656@qq.com', '201舍友', '宿舍剩余电量：' + str(errmsg), '')
         send_mail('2031915277@qq.com', '201舍友', '宿舍剩余电量：' + str(errmsg), '')
         send_mail('c1470005346@163.com', '201舍友', '宿舍剩余电量：' + str(errmsg), '')
+        send_mail('1470910678@qq.com', '807舍友', '宿舍剩余电量：' + str(hdm_errmsg), '')
 
     if "21:00:00" <= n_time and day == 0:
         day = 1
@@ -145,6 +149,27 @@ def timer_mission(time, num): # 计时器，设置特定时间自动运行爬取
 #     time.sleep(3)
 #     driver.close()
 
+def hdm():#测试是否能登录，真正运行时不调用此函数
+    url = "http://ecard.jyu.edu.cn:8988/web/Common/Tsm.html"
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36 Edg/104.0.1293.70"
+        , "cookie": "JSESSIONID=8C5E5265875ADD82A3C04ADCD4F8C860; username=211110025; ASP.NET_SessionId=av1rtzvcdkiuy53c5yhl4mo5; hallticket=3FDBD0F5454D4F069C99AC242B14CB0E"
+    }
+    data = {
+        "jsondata": "{ \"query_elec_roominfo\": { \"aid\":\"0030000000002501\", \"account\": \"30483\",\"room\": { \"roomid\": \"807\", \"room\": \"807\" },  \"floor\": { \"floorid\": \"\", \"floor\": \"\" }, \"area\": { \"area\": \"嘉应学院\", \"areaname\": \"嘉应学院\" }, \"building\": { \"buildingid\": \"8780\", \"building\": \"南7栋\" },\"extdata\":\"info1=\" } }"
+        , "funname": "synjones.onecard.query.elec.roominfo"
+        , "json": "true"
+    }
+    # 请求表单数据
+    response = requests.post(url, data=data, headers=headers)
+    # 将Json格式字符串转字典
+    content = json.loads(response.text)
+    # 打印数据
+    # print(content)
+    errmsg = float(content['query_elec_roominfo']['errmsg'][7:])
+    print("hdm: " + errmsg)
+    return errmsg
+
 def test():#测试是否能登录，真正运行时不调用此函数
     url = "http://ecard.jyu.edu.cn:8988/web/Common/Tsm.html"
     headers = {
@@ -163,7 +188,7 @@ def test():#测试是否能登录，真正运行时不调用此函数
     # 打印数据
     print(content)
     errmsg = float(content['query_elec_roominfo']['errmsg'][7:])
-    print(errmsg)
+    print("test: " + errmsg)
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
