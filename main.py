@@ -57,10 +57,10 @@ def send_mail(to_addr, To_msg, subject, text):#转发邮箱函数： to_addr = �
 def req():#爬取程序
     global n_time, day
     url = "http://ecard.jyu.edu.cn:8988/web/Common/Tsm.html"  # 210.38.160.91
-    headers = {# headers和data都要用网页开发者模式来获取
+    headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36 Edg/104.0.1293.70"
         ,
-        "cookie": "JSESSIONID=E42A468E99F3974DEDFFABB1CC236574; ASP.NET_SessionId=rxp05vlp33tf3jads5newt0a; hallticket=EF8B383F528C4903BF3FB633CE8B5E02; username=211110025"
+        "cookie": "JSESSIONID=8C5E5265875ADD82A3C04ADCD4F8C860; username=211110025; ASP.NET_SessionId=av1rtzvcdkiuy53c5yhl4mo5; hallticket=3FDBD0F5454D4F069C99AC242B14CB0E"
     }
     data = {
         "jsondata": "{ \"query_elec_roominfo\": { \"aid\":\"0030000000002501\", \"account\": \"30483\",\"room\": { \"roomid\": \"201\", \"room\": \"201\" },  \"floor\": { \"floorid\": \"\", \"floor\": \"\" }, \"area\": { \"area\": \"嘉应学院\", \"areaname\": \"嘉应学院\" }, \"building\": { \"buildingid\": \"9318\", \"building\": \"中4A栋\" },\"extdata\":\"info1=\" } }"
@@ -113,8 +113,6 @@ def req():#爬取程序
         timer_mission(n_time, day)
 
 def timer_mission(time, num): # 计时器，设置特定时间自动运行爬取电费数据
-    global flag
-    flag = not flag
     # 获取现在时间
     now_time = datetime.datetime.now()
     # 获取明天时间
@@ -148,16 +146,15 @@ def timer_mission(time, num): # 计时器，设置特定时间自动运行爬取
 #     driver.close()
 
 def test():#测试是否能登录，真正运行时不调用此函数
-    url = "http://ecard.jyu.edu.cn:8988/web/Common/Tsm.html"# 210.38.160.91
+    url = "http://ecard.jyu.edu.cn:8988/web/Common/Tsm.html"
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36 Edg/104.0.1293.70"
-        ,
-        "cookie": "JSESSIONID=E42A468E99F3974DEDFFABB1CC236574; ASP.NET_SessionId=rxp05vlp33tf3jads5newt0a; hallticket=EF8B383F528C4903BF3FB633CE8B5E02; username=211110025"
+        , "cookie": "JSESSIONID=8C5E5265875ADD82A3C04ADCD4F8C860; username=211110025; ASP.NET_SessionId=av1rtzvcdkiuy53c5yhl4mo5; hallticket=3FDBD0F5454D4F069C99AC242B14CB0E"
     }
     data = {
-        "jsondata":"{ \"query_elec_roominfo\": { \"aid\":\"0030000000002501\", \"account\": \"30483\",\"room\": { \"roomid\": \"201\", \"room\": \"201\" },  \"floor\": { \"floorid\": \"\", \"floor\": \"\" }, \"area\": { \"area\": \"嘉应学院\", \"areaname\": \"嘉应学院\" }, \"building\": { \"buildingid\": \"9318\", \"building\": \"中4A栋\" },\"extdata\":\"info1=\" } }"
-        ,"funname":"synjones.onecard.query.elec.roominfo"
-        ,"json":"true"
+        "jsondata": "{ \"query_elec_roominfo\": { \"aid\":\"0030000000002501\", \"account\": \"30483\",\"room\": { \"roomid\": \"201\", \"room\": \"201\" },  \"floor\": { \"floorid\": \"\", \"floor\": \"\" }, \"area\": { \"area\": \"嘉应学院\", \"areaname\": \"嘉应学院\" }, \"building\": { \"buildingid\": \"9318\", \"building\": \"中4A栋\" },\"extdata\":\"info1=\" } }"
+        , "funname": "synjones.onecard.query.elec.roominfo"
+        , "json": "true"
     }
     # 请求表单数据
     response = requests.post(url, data=data, headers=headers)
