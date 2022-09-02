@@ -167,7 +167,7 @@ def hdm():#测试是否能登录，真正运行时不调用此函数
     # 打印数据
     # print(content)
     errmsg = float(content['query_elec_roominfo']['errmsg'][7:])
-    print("hdm: " + errmsg)
+    print("hdm: " + str(errmsg))
     return errmsg
 
 def test():#测试是否能登录，真正运行时不调用此函数
@@ -188,15 +188,15 @@ def test():#测试是否能登录，真正运行时不调用此函数
     # 打印数据
     print(content)
     errmsg = float(content['query_elec_roominfo']['errmsg'][7:])
-    print("test: " + errmsg)
+    print("test: " + str(errmsg))
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     # login()
-    # test()
-    n_time = "21:00:00"
-    day = 0
-    timer_mission(n_time, day)
+    test()
+    # n_time = "21:00:00"
+    # day = 0
+    # timer_mission(n_time, day)
     # 发送邮件
     # send_mail('947338658@qq.com', '201舍友', '', '')
 
