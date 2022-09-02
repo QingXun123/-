@@ -8,15 +8,23 @@ Software architecture description
 
 #### Installation
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1. Run "PIP install -r requirements.txt" to install the environment
+
+
 
 #### Instructions
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+
+
+Send_mail sends mail
+
+2. Req crawler
+
+The timer_mission timer
+
+4. Test for testing only
+
+Run timer_mission("09:00:00", 0) to automatically crawl the electricity data at 9:00 and 21:00 each day
 
 #### Contribution
 

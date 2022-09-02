@@ -9,15 +9,15 @@ python爬虫爬取数据
 
 #### 安装教程
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1.  运行 "pip install -r requirements.txt" 安装好环境即可
 
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1.  send_mail发送邮件
+2.  req爬取程序
+3.  timer_mission计时器
+4.  test仅供测试
+5.  运行timer_mission("09:00:00", 0)即可实现每天9点和21点自动爬取电费数据
 
 #### 参与贡献
 
