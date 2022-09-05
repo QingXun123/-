@@ -8,7 +8,7 @@ import time
 
 import requests     #导入requests包
 import json
-# from selenium import webdriver
+from selenium import webdriver
 import time
 
 # smtplib 用于邮件的发信动作
@@ -18,7 +18,7 @@ from email.mime.text import MIMEText
 # 构建邮件头
 from email.header import Header
 
-# from selenium.webdriver.common.by import By
+from selenium.webdriver.common.by import By
 
 flag = False
 n_time = None
@@ -107,14 +107,9 @@ def req():#爬取程序
         send_mail('c1470005346@163.com', '201舍友', '宿舍剩余电量：' + str(errmsg), '')
         send_mail('1470910678@qq.com', '807舍友', '宿舍剩余电量：' + str(hdm_errmsg), '')
 
-    if "21:00:00" <= n_time and day == 0:
+    if day == 0:
         day = 1
-        n_time = "09:00:00"
-        timer_mission(n_time, day)
-    else:
-        day = 0
-        n_time = "21:00:00"
-        timer_mission(n_time, day)
+    timer_mission(n_time, day)
 
 def timer_mission(time, num): # 计时器，设置特定时间自动运行爬取电费数据
     # 获取现在时间
@@ -134,20 +129,20 @@ def timer_mission(time, num): # 计时器，设置特定时间自动运行爬取
     timer = threading.Timer(timer_start_time, req)
     timer.start()
 
-# def login():#自动登录校园网
-#     driver = webdriver.Chrome()
-#     # driver.maximize_window()
-#     driver.implicitly_wait("3")
-#     url = "http://210.38.163.113/0.htm"
-#     driver.get(url)
-#     driver.find_element(By.XPATH,
-#                         '/html/body/div/div/div[2]/form[1]/div[1]/input[1]').send_keys("*****")#账号
-#     driver.find_element(By.XPATH,
-#                         '/html/body/div/div/div[2]/form[1]/div[1]/input[2]').send_keys("*****")#密码
-#     driver.find_element(By.XPATH,
-#                         '/html/body/div/div/div[2]/form[1]/div[2]/input[1]').click()
-#     time.sleep(3)
-#     driver.close()
+def login():#自动登录校园网
+    driver = webdriver.Chrome()
+    # driver.maximize_window()
+    driver.implicitly_wait("3")
+    url = "http://210.38.163.113/0.htm"
+    driver.get(url)
+    driver.find_element(By.XPATH,
+                        '/html/body/div/div/div[2]/form[1]/div[1]/input[1]').send_keys("*****")#账号
+    driver.find_element(By.XPATH,
+                        '/html/body/div/div/div[2]/form[1]/div[1]/input[2]').send_keys("*****")#密码
+    driver.find_element(By.XPATH,
+                        '/html/body/div/div/div[2]/form[1]/div[2]/input[1]').click()
+    time.sleep(3)
+    driver.close()
 
 def hdm():#测试是否能登录，真正运行时不调用此函数
     url = "http://ecard.jyu.edu.cn:8988/web/Common/Tsm.html"
@@ -174,7 +169,7 @@ def test():#测试是否能登录，真正运行时不调用此函数
     url = "http://ecard.jyu.edu.cn:8988/web/Common/Tsm.html"
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36 Edg/104.0.1293.70"
-        , "cookie": "JSESSIONID=8C5E5265875ADD82A3C04ADCD4F8C860; username=211110025; ASP.NET_SessionId=av1rtzvcdkiuy53c5yhl4mo5; hallticket=3FDBD0F5454D4F069C99AC242B14CB0E"
+        # , "cookie": "JSESSIONID=8C5E5265875ADD82A3C04ADCD4F8C860; username=211110025; ASP.NET_SessionId=av1rtzvcdkiuy53c5yhl4mo5; hallticket=3FDBD0F5454D4F069C99AC242B14CB0E"
     }
     data = {
         "jsondata": "{ \"query_elec_roominfo\": { \"aid\":\"0030000000002501\", \"account\": \"30483\",\"room\": { \"roomid\": \"201\", \"room\": \"201\" },  \"floor\": { \"floorid\": \"\", \"floor\": \"\" }, \"area\": { \"area\": \"嘉应学院\", \"areaname\": \"嘉应学院\" }, \"building\": { \"buildingid\": \"9318\", \"building\": \"中4A栋\" },\"extdata\":\"info1=\" } }"
@@ -193,10 +188,10 @@ def test():#测试是否能登录，真正运行时不调用此函数
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
     # login()
-    test()
-    # n_time = "21:00:00"
-    # day = 0
-    # timer_mission(n_time, day)
+    # test()
+    n_time = "17:00:00"
+    day = 0
+    timer_mission(n_time, day)
     # 发送邮件
     # send_mail('947338658@qq.com', '201舍友', '', '')
 
