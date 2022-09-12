@@ -196,6 +196,7 @@ if __name__ == '__main__':
         timer_mission(n_time, day)
     except Exception:
         print("出错，重新计时！")
+        send_mail('947338658@qq.com', '201舍友', '爬取失败！', '')
         day = 0
         for i in range(12):
             if n_time < time[i]:
