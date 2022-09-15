@@ -194,7 +194,7 @@ if __name__ == '__main__':
     day = 0
     try:
         timer_mission(n_time, day)
-    except Exception:
+    except json.decoder.JSONDecodeError as err:
         print("出错，重新计时！")
         send_mail('947338658@qq.com', '201舍友', '爬取失败！', '')
         day = 0
