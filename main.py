@@ -57,60 +57,75 @@ def send_mail(to_addr, To_msg, subject, text):#转发邮箱函数： to_addr = �
 
 def req():#爬取程序
     global n_time, day
-    hdm_errmsg = hdm()
-    url = "http://ecard.jyu.edu.cn:8988/web/Common/Tsm.html"  # 210.38.160.91
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36 Edg/104.0.1293.70"
-        ,
-        "cookie": "JSESSIONID=8C5E5265875ADD82A3C04ADCD4F8C860; username=211110025; ASP.NET_SessionId=av1rtzvcdkiuy53c5yhl4mo5; hallticket=3FDBD0F5454D4F069C99AC242B14CB0E"
-    }
-    data = {
-        "jsondata": "{ \"query_elec_roominfo\": { \"aid\":\"0030000000002501\", \"account\": \"30483\",\"room\": { \"roomid\": \"201\", \"room\": \"201\" },  \"floor\": { \"floorid\": \"\", \"floor\": \"\" }, \"area\": { \"area\": \"嘉应学院\", \"areaname\": \"嘉应学院\" }, \"building\": { \"buildingid\": \"9318\", \"building\": \"中4A栋\" },\"extdata\":\"info1=\" } }"
-        , "funname": "synjones.onecard.query.elec.roominfo"
-        , "json": "true"
-    }
-    # 请求表单数据
-    response = requests.post(url, data=data, headers=headers)
-    # 将Json格式字符串转字典
-    content = json.loads(response.text)
-    # 打印数据
-    # print(content)
-    errmsg = float(content['query_elec_roominfo']['errmsg'][7:])
+    try:
+        hdm_errmsg = hdm()
+        url = "http://ecard.jyu.edu.cn:8988/web/Common/Tsm.html"  # 210.38.160.91
+        headers = {
+            "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.102 Safari/537.36 Edg/104.0.1293.70"
+            ,
+            "cookie": "JSESSIONID=8C5E5265875ADD82A3C04ADCD4F8C860; username=211110025; ASP.NET_SessionId=av1rtzvcdkiuy53c5yhl4mo5; hallticket=3FDBD0F5454D4F069C99AC242B14CB0E"
+        }
+        data = {
+            "jsondata": "{ \"query_elec_roominfo\": { \"aid\":\"0030000000002501\", \"account\": \"30483\",\"room\": { \"roomid\": \"201\", \"room\": \"201\" },  \"floor\": { \"floorid\": \"\", \"floor\": \"\" }, \"area\": { \"area\": \"嘉应学院\", \"areaname\": \"嘉应学院\" }, \"building\": { \"buildingid\": \"9318\", \"building\": \"中4A栋\" },\"extdata\":\"info1=\" } }"
+            , "funname": "synjones.onecard.query.elec.roominfo"
+            , "json": "true"
+        }
+        # 请求表单数据
+        response = requests.post(url, data=data, headers=headers)
+        # 将Json格式字符串转字典
+        content = json.loads(response.text)
+        # 打印数据
+        # print(content)
+        errmsg = float(content['query_elec_roominfo']['errmsg'][7:])
 
-    if errmsg < 10.0:
-        send_mail('947338658@qq.com', '201舍友', '宿舍剩余电量不足10，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-        send_mail('2105287320@qq.com', '201舍友', '宿舍剩余电量不足10，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-        send_mail('1286805840@qq.com', '201舍友', '宿舍剩余电量不足10，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-        send_mail('2601260031@qq.com', '201舍友', '宿舍剩余电量不足10，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-        send_mail('1933727856@qq.com', '201舍友', '宿舍剩余电量不足10，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-        send_mail('3132475656@qq.com', '201舍友', '宿舍剩余电量不足10，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-        send_mail('2031915277@qq.com', '201舍友', '宿舍剩余电量不足10，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-        send_mail('c1470005346@163.com', '201舍友', '宿舍剩余电量不足10，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-    elif errmsg < 40.0:
-        send_mail('947338658@qq.com', '201舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-        send_mail('2105287320@qq.com', '201舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-        send_mail('1286805840@qq.com', '201舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-        send_mail('2601260031@qq.com', '201舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-        send_mail('1933727856@qq.com', '201舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-        send_mail('3132475656@qq.com', '201舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-        send_mail('2031915277@qq.com', '201舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-        send_mail('c1470005346@163.com', '201舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-    else:
-        send_mail('947338658@qq.com', '201舍友', '宿舍剩余电量：' + str(errmsg), '')
-        send_mail('2105287320@qq.com', '201舍友', '宿舍剩余电量：' + str(errmsg), '')
-        send_mail('1286805840@qq.com', '201舍友', '宿舍剩余电量：' + str(errmsg), '')
-        send_mail('2601260031@qq.com', '201舍友', '宿舍剩余电量：' + str(errmsg), '')
-        send_mail('1933727856@qq.com', '201舍友', '宿舍剩余电量：' + str(errmsg), '')
-        send_mail('3132475656@qq.com', '201舍友', '宿舍剩余电量：' + str(errmsg), '')
-        send_mail('2031915277@qq.com', '201舍友', '宿舍剩余电量：' + str(errmsg), '')
-        send_mail('c1470005346@163.com', '201舍友', '宿舍剩余电量：' + str(errmsg), '')
+        if errmsg < 10.0:
+            send_mail('947338658@qq.com', '201舍友', '宿舍剩余电量不足10，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
+            send_mail('2105287320@qq.com', '201舍友', '宿舍剩余电量不足10，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
+            send_mail('1286805840@qq.com', '201舍友', '宿舍剩余电量不足10，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
+            send_mail('2601260031@qq.com', '201舍友', '宿舍剩余电量不足10，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
+            send_mail('1933727856@qq.com', '201舍友', '宿舍剩余电量不足10，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
+            send_mail('3132475656@qq.com', '201舍友', '宿舍剩余电量不足10，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
+            send_mail('2031915277@qq.com', '201舍友', '宿舍剩余电量不足10，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
+            send_mail('c1470005346@163.com', '201舍友', '宿舍剩余电量不足10，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
+        elif errmsg < 40.0:
+            send_mail('947338658@qq.com', '201舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
+            send_mail('2105287320@qq.com', '201舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
+            send_mail('1286805840@qq.com', '201舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
+            send_mail('2601260031@qq.com', '201舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
+            send_mail('1933727856@qq.com', '201舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
+            send_mail('3132475656@qq.com', '201舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
+            send_mail('2031915277@qq.com', '201舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
+            send_mail('c1470005346@163.com', '201舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
+        else:
+            send_mail('947338658@qq.com', '201舍友', '宿舍剩余电量：' + str(errmsg), '')
+            send_mail('2105287320@qq.com', '201舍友', '宿舍剩余电量：' + str(errmsg), '')
+            send_mail('1286805840@qq.com', '201舍友', '宿舍剩余电量：' + str(errmsg), '')
+            send_mail('2601260031@qq.com', '201舍友', '宿舍剩余电量：' + str(errmsg), '')
+            send_mail('1933727856@qq.com', '201舍友', '宿舍剩余电量：' + str(errmsg), '')
+            send_mail('3132475656@qq.com', '201舍友', '宿舍剩余电量：' + str(errmsg), '')
+            send_mail('2031915277@qq.com', '201舍友', '宿舍剩余电量：' + str(errmsg), '')
+            send_mail('c1470005346@163.com', '201舍友', '宿舍剩余电量：' + str(errmsg), '')
 
-    # hdm的消息
-    send_mail('1470910678@qq.com', '807舍友', '宿舍剩余电量：' + str(hdm_errmsg), '')
+        # hdm的消息
+        send_mail('1470910678@qq.com', '807舍友', '宿舍剩余电量：' + str(hdm_errmsg), '')
+        n_time = time[9]
 
-    if day == 0:
-        day = 1
-    timer_mission(n_time, day)
+        if day == 0:
+            day = 1
+        timer_mission(n_time, day)
+    except json.decoder.JSONDecodeError:
+        print("出错，重新计时！")
+        send_mail('947338658@qq.com', '201舍友', '爬取失败！', '')
+        day = 0
+        for i in range(12):
+            if n_time < time[i]:
+                n_time = time[i]
+                break
+            elif i == 11:
+                n_time = time[0]
+                day = 1
+                break
+        timer_mission(n_time, day)
 
 def timer_mission(time, num): # 计时器，设置特定时间自动运行爬取电费数据
     # 获取现在时间
@@ -190,23 +205,9 @@ def test():#测试是否能登录，真正运行时不调用此函数
 if __name__ == '__main__':
     # login()
     # test()
-    n_time = "22:23:00"
+    n_time = "12:00:00"
     day = 0
-    try:
-        timer_mission(n_time, day)
-    except json.decoder.JSONDecodeError as err:
-        print("出错，重新计时！")
-        send_mail('947338658@qq.com', '201舍友', '爬取失败！', '')
-        day = 0
-        for i in range(12):
-            if n_time < time[i]:
-                n_time = time[i]
-                break
-            elif i == 11:
-                n_time = time[0]
-                day = 1
-                break
-        timer_mission(n_time, day)
+    timer_mission(n_time, day)
     # 发送邮件
     # send_mail('947338658@qq.com', '201舍友', '', '')
 
