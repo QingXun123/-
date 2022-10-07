@@ -23,7 +23,7 @@ from selenium.webdriver.common.by import By
 flag = False
 n_time = None
 day = None
-time = ["00:00:00", "02:00:00", "04:00:00", "06:00:00", "08:00:00", "10:00:00", "12:00:00", "14:00:00", "16:00:00", "18:00:00", "20:00:00", "22:00:00"]
+time = ["00:00:00", "01:00:00", "02:00:00", "03:00:00", "04:00:00", "05:00:00", "06:00:00", "07:00:00", "08:00:00", "09:00:00", "10:00:00", "11:00:00", "12:00:00", "13:00:00", "14:00:00", "15:00:00", "16:00:00", "17:00:00", "18:00:00", "19:00:00", "20:00:00", "21:00:00", "22:00:00", "23:00:00"]
 
 def send_mail(to_addr, To_msg, subject, text):#转发邮箱函数： to_addr = 接收者的邮箱, To_msg = 接收者的名字, subject = 邮箱主题, text = 邮箱内容
     # 发信方的信息：发信邮箱，QQ 邮箱授权码
@@ -78,24 +78,15 @@ def req():#爬取程序
         # print(content)
         errmsg = float(content['query_elec_roominfo']['errmsg'][7:])
 
-        if errmsg < 10.0:
-            send_mail('947338658@qq.com', '201舍友', '宿舍剩余电量不足10，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-            send_mail('2105287320@qq.com', '201舍友', '宿舍剩余电量不足10，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-            send_mail('1286805840@qq.com', '201舍友', '宿舍剩余电量不足10，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-            send_mail('2601260031@qq.com', '201舍友', '宿舍剩余电量不足10，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-            send_mail('1933727856@qq.com', '201舍友', '宿舍剩余电量不足10，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-            send_mail('3132475656@qq.com', '201舍友', '宿舍剩余电量不足10，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-            send_mail('2031915277@qq.com', '201舍友', '宿舍剩余电量不足10，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-            send_mail('c1470005346@163.com', '201舍友', '宿舍剩余电量不足10，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-        elif errmsg < 40.0:
-            send_mail('947338658@qq.com', '201舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-            send_mail('2105287320@qq.com', '201舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-            send_mail('1286805840@qq.com', '201舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-            send_mail('2601260031@qq.com', '201舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-            send_mail('1933727856@qq.com', '201舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-            send_mail('3132475656@qq.com', '201舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-            send_mail('2031915277@qq.com', '201舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
-            send_mail('c1470005346@163.com', '201舍友', '宿舍剩余电量不足40，请及时缴费！\n宿舍剩余电量：' + str(errmsg), '')
+        if errmsg < 40.0:
+            send_mail('947338658@qq.com', '201舍友', '宿舍剩余电量：' + str(errmsg) + '  请及时缴费！', '')
+            send_mail('2105287320@qq.com', '201舍友', '宿舍剩余电量：' + str(errmsg) + '  请及时缴费！', '')
+            send_mail('1286805840@qq.com', '201舍友', '宿舍剩余电量：' + str(errmsg) + '  请及时缴费！', '')
+            send_mail('2601260031@qq.com', '201舍友', '宿舍剩余电量：' + str(errmsg) + '  请及时缴费！', '')
+            send_mail('1933727856@qq.com', '201舍友', '宿舍剩余电量：' + str(errmsg) + '  请及时缴费！', '')
+            send_mail('3132475656@qq.com', '201舍友', '宿舍剩余电量：' + str(errmsg) + '  请及时缴费！', '')
+            send_mail('2031915277@qq.com', '201舍友', '宿舍剩余电量：' + str(errmsg) + '  请及时缴费！', '')
+            send_mail('c1470005346@163.com', '201舍友', '宿舍剩余电量：' + str(errmsg) + '  请及时缴费！', '')
         else:
             send_mail('947338658@qq.com', '201舍友', '宿舍剩余电量：' + str(errmsg), '')
             send_mail('2105287320@qq.com', '201舍友', '宿舍剩余电量：' + str(errmsg), '')
@@ -108,7 +99,7 @@ def req():#爬取程序
 
         # hdm的消息
         send_mail('1470910678@qq.com', '807舍友', '宿舍剩余电量：' + str(hdm_errmsg), '')
-        n_time = time[9]
+        n_time = time[18]
 
         if day == 0:
             day = 1
@@ -117,11 +108,11 @@ def req():#爬取程序
         print("出错，重新计时！")
         send_mail('947338658@qq.com', '201舍友', '爬取失败！', '')
         day = 0
-        for i in range(12):
+        for i in range(24):
             if n_time < time[i]:
                 n_time = time[i]
                 break
-            elif i == 11:
+            elif i == 23:
                 n_time = time[0]
                 day = 1
                 break
@@ -205,7 +196,7 @@ def test():#测试是否能登录，真正运行时不调用此函数
 if __name__ == '__main__':
     # login()
     # test()
-    n_time = "12:00:00"
+    n_time = "18:00:00"
     day = 0
     timer_mission(n_time, day)
     # 发送邮件
