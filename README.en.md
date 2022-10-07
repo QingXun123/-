@@ -11,20 +11,15 @@ Software architecture description
 1. Run "PIP install -r requirements.txt" to install the environment
 
 
-
 #### Instructions
 
+1. "send_mail" sends the email
+2. The "req" crawler
+3. "timer_mission" timer
+4. "test" is for testing only
+5. Automatically crawl the electricity bill at 18:00:00 every day (if you need to change it, please reassign "n_time" in line 102)
+6. The "n_time" in the "main" function is the time of day when the program first crawled, and the "day" value is 0
 
-
-Send_mail sends mail
-
-2. Req crawler
-
-The timer_mission timer
-
-4. Test for testing only
-
-Run timer_mission("09:00:00", 0) to automatically crawl the electricity data at 9:00 and 21:00 each day
 
 #### Contribution
 
