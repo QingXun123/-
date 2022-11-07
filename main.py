@@ -104,8 +104,8 @@ def req():#爬取程序
         if day == 0:
             day = 1
         timer_mission(n_time, day)
-    except json.decoder.JSONDecodeError:
-        print("出错，重新计时！")
+    except Exception as e:
+        print("出错，重新计时！报错：" + e)
         send_mail('947338658@qq.com', '201舍友', '爬取失败！', '')
         day = 0
         for i in range(24):
